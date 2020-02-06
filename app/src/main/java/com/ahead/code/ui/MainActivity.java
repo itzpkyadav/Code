@@ -86,7 +86,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnSchedule:
-                startActivity(new Intent(MainActivity.this, ScheduleActivity.class));
+                Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
+                intent.putExtra("date", AppConstants.SIMPLE_DATE_FORMAT.format(calendar.getTime()));
+                intent.putExtra("taskList", new Gson().toJson(taskAdapter.getList()));
+                startActivity(intent);
                 break;
         }
     }
