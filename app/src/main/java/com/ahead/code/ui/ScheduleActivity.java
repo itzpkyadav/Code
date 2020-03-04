@@ -32,7 +32,6 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     private TextView meeting_date, start_time, end_time;
     private EditText description;
     private List<Task> taskList;
-    private Button btnSubmit;
     private Intent intent;
 
     @Override
@@ -56,7 +55,6 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         meeting_date = findViewById(R.id.meeting_date);
         description = findViewById(R.id.description);
         start_time = findViewById(R.id.start_time);
-        btnSubmit = findViewById(R.id.btnSubmit);
         end_time = findViewById(R.id.end_time);
 
         meeting_date.setText(intent.getStringExtra("date"));

@@ -11,10 +11,12 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahead.code.R;
+import com.ahead.code.databinding.ActivityMainBinding;
 import com.ahead.code.network.APIClient;
 import com.ahead.code.network.APITransaction;
 import com.ahead.code.network.interfaces.APIResponse;
@@ -33,17 +35,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "MainActivity";
 
+    private ActivityMainBinding binding;
+
     private Handler handler = new Handler();
     private ApiInterface apiInterface;
     private TaskAdapter taskAdapter;
     private Calendar calendar;
-    private TextView tvDate;
+    // private TextView tvDate;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        // setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         initViews();
 
@@ -54,13 +59,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apiInterface = APIClient.create();
         calendar = Calendar.getInstance();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setActionBar(toolbar);
+        // Toolbar toolbar = findViewById(R.id.toolbar);
+        setActionBar(binding.toolbar);
 
-        LinearLayout llPrevious = findViewById(R.id.llPrevious);
-        LinearLayout llNext = findViewById(R.id.llNext);
-        Button btnSchedule = findViewById(R.id.btnSchedule);
-        tvDate = findViewById(R.id.tvDate);
+        // LinearLayout llPrevious = findViewById(R.id.llPrevious);
+        // LinearLayout llNext = findViewById(R.id.llNext);
+        // Button btnSchedule = findViewById(R.id.btnSchedule);
+        // tvDate = findViewById(R.id.tvDate);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -68,9 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(taskAdapter);
         taskAdapter.notifyDataSetChanged();
 
-        btnSchedule.setOnClickListener(this);
-        llPrevious.setOnClickListener(this);
-        llNext.setOnClickListener(this);
+        binding.btnSchedule.setOnClickListener(this);
+        binding.llPrevious.setOnClickListener(this);
+        binding.llNext.setOnClickListener(this);
     }
 
     @Override
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         handler.post(() -> {
             String date = AppConstants.SIMPLE_DATE_FORMAT.format(calendar.getTime());
             Log.d(TAG, "getTask: " + date);
-            tvDate.setText(date);
+            binding.tvDate.setText(date);
 
             retrofit2.Call request = apiInterface.getSchedule(date);
 
