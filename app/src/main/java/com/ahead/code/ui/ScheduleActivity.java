@@ -36,7 +36,6 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     private Intent intent;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
