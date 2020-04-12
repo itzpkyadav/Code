@@ -10,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
+    private static final String TAG = "APIClient";
+
     private static final String URL = "http://fathomless-shelf-5846.herokuapp.com/api/";
 
     private static Retrofit getInstance() {
