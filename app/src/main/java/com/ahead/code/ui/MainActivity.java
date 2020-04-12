@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Button btnSchedule = findViewById(R.id.btnSchedule);
         // tvDate = findViewById(R.id.tvDate);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         taskAdapter = new TaskAdapter();
-        recyclerView.setAdapter(taskAdapter);
+        binding.recyclerView.setAdapter(taskAdapter);
         taskAdapter.notifyDataSetChanged();
 
         binding.btnSchedule.setOnClickListener(this);

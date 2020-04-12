@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.ahead.code.R;
+import com.ahead.code.databinding.ActivityScheduleBinding;
 import com.ahead.code.network.model.Task;
 import com.ahead.code.utils.AppConstants;
 import com.ahead.code.utils.AppHelper;
@@ -29,15 +28,18 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = "ScheduleActivity";
 
-    private TextView meeting_date, start_time, end_time;
-    private EditText description;
+    private ActivityScheduleBinding binding;
+
+    // private TextView meeting_date, start_time, end_time;
+    // private EditText description;
     private List<Task> taskList;
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        // setContentView(R.layout.activity_schedule);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule);
 
         if (getIntent() != null)
             intent = getIntent();
@@ -48,25 +50,25 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setActionBar(toolbar);
+        // Toolbar toolbar = findViewById(R.id.toolbar);
+        setActionBar(binding.toolbar);
 
-        meeting_date = findViewById(R.id.meeting_date);
-        description = findViewById(R.id.description);
-        start_time = findViewById(R.id.start_time);
-        end_time = findViewById(R.id.end_time);
+        // meeting_date = findViewById(R.id.meeting_date);
+        // description = findViewById(R.id.description);
+        // start_time = findViewById(R.id.start_time);
+        // end_time = findViewById(R.id.end_time);
 
-        meeting_date.setText(intent.getStringExtra("date"));
+        binding.meetingDate.setText(intent.getStringExtra("date"));
         Type type = new TypeToken<List<Task>>() {
         }.getType();
         taskList = (new Gson().fromJson(intent.getStringExtra("taskList"), type));
         Log.d(TAG, "initViews: " + intent.getStringExtra("taskList"));
 
-        Button btnSubmit = findViewById(R.id.btnSubmit);
+        // Button btnSubmit = findViewById(R.id.btnSubmit);
 
-        start_time.setOnClickListener(this);
-        btnSubmit.setOnClickListener(this);
-        end_time.setOnClickListener(this);
+        binding.startTime.setOnClickListener(this);
+        binding.btnSubmit.setOnClickListener(this);
+        binding.endTime.setOnClickListener(this);
     }
 
     @Override
@@ -76,13 +78,13 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
                 Log.d(TAG, "onClick: Submit: ");
                 try {
                     boolean isAvailable = true;
-                    Date startDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(meeting_date.getText().toString() + " " + start_time.getText().toString());
-                    Date endDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(meeting_date.getText().toString() + " " + end_time.getText().toString());
+                    Date startDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(binding.meetingDate.getText().toString() + " " + binding.startTime.getText().toString());
+                    Date endDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(binding.meetingDate.getText().toString() + " " + binding.endTime.getText().toString());
 
                     if (startDate.before(endDate)) {
                         for (Task task : taskList) {
-                            Date listStartDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(meeting_date.getText().toString() + " " + task.getStart_time());
-                            Date listEndDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(meeting_date.getText().toString() + " " + task.getEnd_time());
+                            Date listStartDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(binding.meetingDate.getText().toString() + " " + task.getStart_time());
+                            Date listEndDate = AppConstants.SIMPLE_DATETIME_FORMAT.parse(binding.meetingDate.getText().toString() + " " + task.getEnd_time());
 
                             if ((listStartDate.after(startDate) && listStartDate.before(endDate)) || (listEndDate.after(startDate) && listEndDate.before(endDate))) {
                                 isAvailable = false;
@@ -105,7 +107,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
             case R.id.start_time:
             case R.id.end_time:
                 try {
-                    Date date = AppConstants.SIMPLE_DATE_FORMAT.parse(meeting_date.getText().toString());
+                    Date date = AppConstants.SIMPLE_DATE_FORMAT.parse(binding.meetingDate.getText().toString());
 
                     // Launch Time Picker Dialog
                     TimePickerDialog timePickerDialog = new TimePickerDialog(this,
