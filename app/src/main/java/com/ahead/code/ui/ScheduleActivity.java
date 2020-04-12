@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.ahead.code.R;
+import com.ahead.code.data.network.model.Task;
 import com.ahead.code.databinding.ActivityScheduleBinding;
-import com.ahead.code.network.model.Task;
 import com.ahead.code.utils.AppConstants;
 import com.ahead.code.utils.AppHelper;
 import com.google.gson.Gson;
@@ -30,15 +30,12 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
     private ActivityScheduleBinding binding;
 
-    // private TextView meeting_date, start_time, end_time;
-    // private EditText description;
     private List<Task> taskList;
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_schedule);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_schedule);
 
         if (getIntent() != null)
@@ -50,21 +47,13 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
-        // Toolbar toolbar = findViewById(R.id.toolbar);
         setActionBar(binding.toolbar);
-
-        // meeting_date = findViewById(R.id.meeting_date);
-        // description = findViewById(R.id.description);
-        // start_time = findViewById(R.id.start_time);
-        // end_time = findViewById(R.id.end_time);
 
         binding.meetingDate.setText(intent.getStringExtra("date"));
         Type type = new TypeToken<List<Task>>() {
         }.getType();
         taskList = (new Gson().fromJson(intent.getStringExtra("taskList"), type));
         Log.d(TAG, "initViews: " + intent.getStringExtra("taskList"));
-
-        // Button btnSubmit = findViewById(R.id.btnSubmit);
 
         binding.startTime.setOnClickListener(this);
         binding.btnSubmit.setOnClickListener(this);

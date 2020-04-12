@@ -1,4 +1,4 @@
-package com.ahead.code.network.interfaces;
+package com.ahead.code.data.network.interfaces;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

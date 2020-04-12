@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahead.code.R;
-import com.ahead.code.network.model.Task;
+import com.ahead.code.data.network.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;

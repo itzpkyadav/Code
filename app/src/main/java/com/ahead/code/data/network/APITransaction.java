@@ -1,10 +1,10 @@
-package com.ahead.code.network;
+package com.ahead.code.data.network;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.ahead.code.network.interfaces.APIResponse;
+import com.ahead.code.data.network.interfaces.APIResponse;
 import com.google.gson.Gson;
 
 import retrofit2.Call;

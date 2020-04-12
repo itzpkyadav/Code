@@ -1,4 +1,4 @@
-package com.ahead.code.network.model;
+package com.ahead.code.data.network.model;
 
 import java.io.Serializable;
 

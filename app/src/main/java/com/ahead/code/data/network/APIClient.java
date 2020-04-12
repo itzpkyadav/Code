@@ -1,11 +1,12 @@
-package com.ahead.code.network;
+package com.ahead.code.data.network;
 
-import com.ahead.code.network.interfaces.ApiInterface;
+import com.ahead.code.data.network.interfaces.ApiInterface;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
@@ -25,6 +26,7 @@ public class APIClient {
                 .baseUrl(URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
