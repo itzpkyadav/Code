@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.ahead.code.R;
 import com.ahead.code.data.network.model.Task;
 import com.ahead.code.databinding.ActivityScheduleBinding;
+import com.ahead.code.ui.base.BaseActivity;
 import com.ahead.code.utils.AppConstants;
 import com.ahead.code.utils.AppHelper;
 import com.google.gson.Gson;
@@ -24,7 +24,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener {
+public class ScheduleActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "ScheduleActivity";
 

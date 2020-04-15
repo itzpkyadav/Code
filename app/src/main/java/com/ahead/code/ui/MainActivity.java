@@ -2,40 +2,47 @@ package com.ahead.code.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ahead.code.R;
 import com.ahead.code.databinding.ActivityMainBinding;
 import com.ahead.code.ui.adapter.TaskAdapter;
+import com.ahead.code.ui.base.BaseActivity;
 import com.ahead.code.ui.viewModel.MainViewModel;
 import com.google.gson.Gson;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
     private ActivityMainBinding binding;
-
+    private MainViewModel viewModel;
     private TaskAdapter taskAdapter;
-    MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
+        // viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        Log.d(TAG, "onCreate: ViewModel: " + viewModel);
         binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
 
         initViews();
 
         viewModel.getSchedule().observe(this, list -> {
             taskAdapter.setList(list);
             taskAdapter.notifyDataSetChanged();
+        });
+
+        viewModel.getDate().observe(this, date -> {
+            binding.tvDate.setText(date);
         });
     }
 
