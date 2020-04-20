@@ -86,9 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btnSchedule"
-            android:layout_below="@+id/toolbar"
-            android:layout_marginStart="@dimen/_40ssp"
-            android:layout_marginEnd="@dimen/_40ssp" />
+            android:layout_below="@+id/toolbar" />
 
         <Button
             android:id="@+id/btnSchedule"

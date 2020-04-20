@@ -1,8 +1,8 @@
 package com.ahead.code.ui.base;
 
-import androidx.appcompat.app.AppCompatActivity;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends DaggerAppCompatActivity {
 
     private static final String TAG = "BaseActivity";
 }
