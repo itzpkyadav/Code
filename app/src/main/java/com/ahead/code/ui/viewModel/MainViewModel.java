@@ -13,6 +13,8 @@ import com.ahead.code.utils.AppConstants;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainViewModel extends ViewModel {
 
     private static final String TAG = "MainViewModel";
@@ -22,6 +24,7 @@ public class MainViewModel extends ViewModel {
     private Calendar calendar;
     public String date;
 
+    @Inject
     public MainViewModel() {
         repository = Repository.getInstance();
         calendar = Calendar.getInstance();

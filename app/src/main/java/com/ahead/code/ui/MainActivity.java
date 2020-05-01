@@ -14,7 +14,10 @@ import com.ahead.code.databinding.ActivityMainBinding;
 import com.ahead.code.ui.adapter.TaskAdapter;
 import com.ahead.code.ui.base.BaseActivity;
 import com.ahead.code.ui.viewModel.MainViewModel;
+import com.ahead.code.ui.viewModel.factory.ViewModelProviderFactory;
 import com.google.gson.Gson;
+
+import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -24,12 +27,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MainViewModel viewModel;
     private TaskAdapter taskAdapter;
 
+    @Inject
+    ViewModelProviderFactory providerFactory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         // viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel = ViewModelProviders.of(this, providerFactory).get(MainViewModel.class);
         Log.d(TAG, "onCreate: ViewModel: " + viewModel);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
