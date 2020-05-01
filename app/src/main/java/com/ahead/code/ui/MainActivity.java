@@ -23,7 +23,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
     private TaskAdapter taskAdapter;
-    private String helloWorld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +35,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         binding.setLifecycleOwner(this);
 
         initViews();
-
-        Log.d(TAG, "onCreate: " + helloWorld);
 
         viewModel.getSchedule().observe(this, list -> {
             taskAdapter.setList(list);
