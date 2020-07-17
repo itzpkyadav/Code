@@ -1,6 +1,7 @@
 package com.ahead.code.data.network;
 
-import com.ahead.code.data.network.interfaces.ApiInterface;
+import com.ahead.code.data.network.interfaces.Api;
+import com.ahead.code.utils.AppConstants;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,10 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-    private static final String TAG = "APIClient";
-
-    private static final String URL = "http://fathomless-shelf-5846.herokuapp.com/api/";
-
     private static Retrofit getInstance() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.MINUTES)
@@ -23,14 +20,14 @@ public class APIClient {
                 .build();
 
         return new Retrofit.Builder()
-                .baseUrl(URL)
+                .baseUrl(AppConstants.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
-    public static ApiInterface create() {
-        return getInstance().create(ApiInterface.class);
+    public static Api create() {
+        return getInstance().create(Api.class);
     }
 }

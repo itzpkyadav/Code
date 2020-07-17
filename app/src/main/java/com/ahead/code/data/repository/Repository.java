@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.ahead.code.data.network.APIClient;
 import com.ahead.code.data.network.APITransaction;
 import com.ahead.code.data.network.interfaces.APIResponse;
-import com.ahead.code.data.network.interfaces.ApiInterface;
+import com.ahead.code.data.network.interfaces.Api;
 import com.ahead.code.data.network.model.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,10 +25,10 @@ public class Repository {
 
     private Handler handler = new Handler();
     private static Repository repository;
-    private ApiInterface apiInterface;
+    private Api api;
 
     private Repository() {
-        apiInterface = APIClient.create();
+        api = APIClient.create();
     }
 
     public static Repository getInstance() {
@@ -43,7 +43,7 @@ public class Repository {
             Log.d(TAG, "getTask: " + date);
             // binding.tvDate.setText(date);
 
-            retrofit2.Call request = apiInterface.getSchedule(date);
+            retrofit2.Call request = api.getSchedule(date);
 
             APITransaction.startNetworkService(request, new APIResponse() {
                 @Override

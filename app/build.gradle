@@ -73,4 +73,17 @@ dependencies {
 
     // Dimension
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    // Reactive Streams (convert Observable to LiveData)
+    // implementation "androidx.lifecycle:lifecycle-reactivestreams:2.2.0"
+    implementation "android.arch.lifecycle:reactivestreams:1.1.1"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:4.11.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+
+    // Architecture component navigation
+    implementation "androidx.navigation:navigation-fragment:2.3.0"
+    implementation "androidx.navigation:navigation-ui:2.3.0"
+    implementation "androidx.navigation:navigation-runtime:2.3.0"
 }

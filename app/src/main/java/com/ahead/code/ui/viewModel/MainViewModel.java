@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.ahead.code.data.network.interfaces.Api;
 import com.ahead.code.data.network.model.Task;
 import com.ahead.code.data.repository.Repository;
 import com.ahead.code.utils.AppConstants;
@@ -24,12 +25,20 @@ public class MainViewModel extends ViewModel {
     private Calendar calendar;
     public String date;
 
+    private Api api;
+
     @Inject
-    public MainViewModel() {
+    public MainViewModel(Api api) {
+        this.api = api;
         repository = Repository.getInstance();
         calendar = Calendar.getInstance();
         date = AppConstants.SIMPLE_DATE_FORMAT.format(calendar.getTime());
         setDate();
+
+        if (this.api == null)
+            Log.d(TAG, "MainViewModel: api is NULL.");
+        else
+            Log.d(TAG, "MainViewModel: api is NOT NULL.");
     }
 
     public void changeDate(int i) {

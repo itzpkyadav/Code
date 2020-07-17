@@ -5,6 +5,8 @@ import java.util.Locale;
 
 public class AppConstants {
 
+    public static final String BASE_URL = "http://fathomless-shelf-5846.herokuapp.com/api/";
+
     public static final String STRING_DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
     public static final String STRING_DATE_FORMAT = "dd-MM-yyyy";
     public static final String STRING_TIME_FORMAT = "HH:mm";

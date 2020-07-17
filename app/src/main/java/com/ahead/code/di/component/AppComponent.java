@@ -7,11 +7,14 @@ import com.ahead.code.di.module.ActivityModule;
 import com.ahead.code.di.module.AppModule;
 import com.ahead.code.di.module.ViewModelFactoryModule;
 
+import javax.inject.Singleton;
+
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
+@Singleton
 @Component(
         modules = {
                 AndroidSupportInjectionModule.class,
